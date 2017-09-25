@@ -24,6 +24,7 @@ Usage
 -----
 
 ```TypeScript
+import { Projection, CRS } from 'charto-leaflet';
 import * as L from 'leaflet';
 
 const JHS180 = new CRS(
