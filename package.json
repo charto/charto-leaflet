@@ -1,0 +1,32 @@
+{
+  "name": "charto-leaflet",
+  "version": "0.0.1",
+  "description": "Useful classes for Leaflet",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "tsc": "tsc",
+    "prepublish": "tsc -p src"
+  },
+  "author": "Juha Järvi",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/charto/charto-leaflet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/charto/charto-leaflet/issues"
+  },
+  "homepage": "https://github.com/charto/charto-leaflet#readme",
+  "keywords": [
+    "leaflet",
+    "map"
+  ],
+  "devDependencies": {
+    "typescript": "^2.5.2"
+  },
+  "dependencies": {
+    "@types/leaflet": "^1.2.0",
+    "leaflet": "^1.2.0"
+  }
+}
