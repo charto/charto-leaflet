@@ -18,7 +18,7 @@ export class CRS extends BaseCRS {
 			1,
 			-Math.min(0, projection.bounds.min!.x),
 			-1,
-			0
+			projection.bounds.max!.y
 		)
 	) {
 		super();
