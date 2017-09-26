@@ -3,3 +3,5 @@
 
 export { Projection } from './Projection';
 export { CRS } from './CRS';
+
+export { CanvasLayer } from './CanvasLayer';
