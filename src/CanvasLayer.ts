@@ -16,9 +16,12 @@ export class CanvasLayer extends L.GridLayer {
 	createTile(xyz: PointZ, cb: (err: any, canvas: HTMLCanvasElement) => void) {
 		const canvas = L.DomUtil.create('canvas', 'leaflet-tile leaflet-tile-loaded') as HTMLCanvasElement;
 		const size = this.getTileSize();
+		const pixelRatio = window.devicePixelRatio;
 
-		canvas.width = size.x;
-		canvas.height = size.y;
+		canvas.width = size.x * pixelRatio;
+		canvas.height = size.y * pixelRatio;
+		canvas.style.width = size.x + 'px';
+		canvas.style.height = size.y + 'px';
 
 		const map: L.Map = (this as any)._map;
 		const margin = 8;
@@ -47,8 +50,9 @@ export class CanvasLayer extends L.GridLayer {
 				canvas,
 				features,
 				bbox,
-				pixelWidth: size.x,
-				pixelHeight: size.y,
+				pixelWidth: size.x * pixelRatio,
+				pixelHeight: size.y * pixelRatio,
+				pixelRatio,
 				zoom
 			}));
 		}).catch(
