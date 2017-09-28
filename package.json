@@ -28,7 +28,7 @@
   "dependencies": {
     "@types/leaflet": "^1.2.0",
     "charto-model": "0.0.1",
-    "charto-render": "0.0.1",
+    "charto-render": "0.0.2",
     "leaflet": "^1.2.0"
   }
 }

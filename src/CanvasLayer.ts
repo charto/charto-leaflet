@@ -43,7 +43,14 @@ export class CanvasLayer extends L.GridLayer {
 			const ne = map.unproject(new L.Point(x + size.x, y), zoom);
 			const bbox = new BBox(sw.lat, sw.lng, ne.lat, ne.lng);
 
-			return(this.renderer.render(canvas, features, bbox, size.x, size.y, zoom));
+			return(this.renderer.render({
+				canvas,
+				features,
+				bbox,
+				pixelWidth: size.x,
+				pixelHeight: size.y,
+				zoom
+			}));
 		}).catch(
 			// Ignore errors in tile rendering for now.
 			// TODO: Maybe draw a warning watermark?
