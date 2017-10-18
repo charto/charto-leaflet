@@ -30,20 +30,21 @@ export class CanvasLayer extends L.GridLayer {
 		const y = xyz.y * size.y;
 		const zoom = xyz.z;
 
+		const sw = map.unproject(new L.Point(x, y + size.y), zoom);
+		const ne = map.unproject(new L.Point(x + size.x, y), zoom);
+		const swBuffer = map.unproject(new L.Point(x - margin, y + size.y + margin), zoom);
+		const neBuffer = map.unproject(new L.Point(x + size.x + margin, y - margin), zoom);
+
 		new Promise((resolve: (layerFeatures: LayerFeaturesPromise) => void) => {
 			// Get bounding box in world coordinates for the tile,
 			// surrounded by a margin measured in pixels to handle symbols
 			// overlapping this tile but centered within neighbor tile edges.
-			const sw = map.unproject(new L.Point(x - margin, y + size.y + margin), zoom);
-			const ne = map.unproject(new L.Point(x + size.x + margin, y - margin), zoom);
-			const bbox = new BBox(sw.lat, sw.lng, ne.lat, ne.lng);
+			const bbox = new BBox(swBuffer.lat, swBuffer.lng, neBuffer.lat, neBuffer.lng);
 
 			// Fetch features inside the bounding box from the model layer.
-			resolve(this.layer.getLayerFeatures(bbox, size.x, size.y))
+			resolve(this.layer.getLayerFeatures(bbox, ne.lat - sw.lat, ne.lng - sw.lng, size.x, size.y))
 		}).then((features: LayerFeatures) => {
 			// Get tile bounding box in world coordinates.
-			const sw = map.unproject(new L.Point(x, y + size.y), zoom);
-			const ne = map.unproject(new L.Point(x + size.x, y), zoom);
 			const bbox = new BBox(sw.lat, sw.lng, ne.lat, ne.lng);
 
 			return(this.renderer.render({
